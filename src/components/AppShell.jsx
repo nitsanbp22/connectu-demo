@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import Header from "./Header";
 import BottomNav from "./BottomNav";
@@ -14,6 +14,10 @@ export default function AppShell({ nav, setNav, onCommunityNav, sharingMode, chi
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  }, [nav]);
 
   return (
     <div className="min-h-screen w-full bg-[#EEF4F6] md:bg-[linear-gradient(145deg,#eef4f6_0%,#f8fbfc_48%,#e7f1f3_100%)] md:px-6">

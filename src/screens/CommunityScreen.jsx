@@ -178,7 +178,7 @@ export default function CommunityScreen({
                 onClick={() => setEditorOpen(true)}
                 className="min-h-11 rounded-full border border-[#008C95] bg-[#EAF6F7] py-3 text-base font-extrabold text-[#008C95]"
               >
-                ניהול המעגל
+                עריכת המעגל הקרוב
               </button>
             </div>
           </Card>

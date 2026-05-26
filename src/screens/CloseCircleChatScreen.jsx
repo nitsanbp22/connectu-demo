@@ -92,7 +92,7 @@ export default function CloseCircleChatScreen({
           className="mx-auto mt-4 flex items-center gap-2 rounded-2xl border border-[#008C95] px-5 py-2 text-sm font-extrabold text-[#008C95]"
         >
           <Users size={17} />
-          ניהול המעגל
+          עריכת המעגל הקרוב
         </button>
         {manageMessage && (
           <p className="mt-3 text-center text-sm font-bold text-[#008C95]">{manageMessage}</p>
@@ -107,10 +107,10 @@ export default function CloseCircleChatScreen({
             </span>
             <div>
               <h2 className="font-extrabold text-[#247A38]">
-                התראה נשלחה למעגל הקרוב שלך
+                {notifications[0].title}
               </h2>
               <p className="mt-1 text-sm font-bold text-[#12324A]/70">
-                נשלחה התראה ל{notifications[0].recipients.join(", ")}
+                {notifications[0].subtitle}
               </p>
               <p className="mt-2 text-xs font-semibold leading-5 text-[#12324A]/55">
                 בפרודקט האמיתי זו הייתה נשלחת כהתראת Push לטלפון של אנשי המעגל הקרוב.
@@ -128,10 +128,10 @@ export default function CloseCircleChatScreen({
             </span>
             <div>
               <h2 className="font-extrabold text-[#247A38]">
-                התראה נשלחה למנטור שלך
+                {mentorNotifications[0].title}
               </h2>
               <p className="mt-1 text-sm font-bold text-[#12324A]/70">
-                נשלחה התראה לעדי
+                {mentorNotifications[0].subtitle}
               </p>
               <p className="mt-2 text-xs font-semibold leading-5 text-[#12324A]/55">
                 בפרודקט האמיתי זו הייתה נשלחת כהתראת Push לטלפון של המנטור שבחרת.

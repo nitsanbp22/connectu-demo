@@ -17,19 +17,19 @@ const sharingOptions = [
   {
     id: "private",
     title: "פרטי",
-    description: "כל המידע משותף בצורה אנונימית מול הכיתה",
+    description: "המידע מוצג אנונימית מול הכיתה או המרצה.",
     icon: Lock,
   },
   {
     id: "public",
     title: "ציבורי",
-    description: "ייפתח צ׳אט עם סטודנטים מההרצאה שחווים אתגרים דומים",
+    description: "נפתח חיבור עם סטודנטים מההרצאה שחווים אתגרים דומים.",
     icon: Globe2,
   },
   {
     id: "closeCircle",
     title: "מעגל קרוב",
-    description: "ייפתח צ׳אט פרטי עם החברים שבחרת",
+    description: "שיתוף רק עם האנשים שבחרת מראש.",
     icon: Users,
   },
 ];
@@ -41,7 +41,13 @@ const sharingModeLabel = {
   closeCircle: "מעגל קרוב",
 };
 
-export default function ProfileScreen({ sharingMode, setSharingMode, onGoSupportPreferences }) {
+export default function ProfileScreen({
+  sharingMode,
+  setSharingMode,
+  externalMessage = "",
+  onClearExternalMessage,
+  onGoSupportPreferences,
+}) {
   const [savedMessage, setSavedMessage] = useState("");
   const [taskReminders, setTaskReminders] = useState(true);
   const [positiveFeedback, setPositiveFeedback] = useState(true);
@@ -50,10 +56,12 @@ export default function ProfileScreen({ sharingMode, setSharingMode, onGoSupport
 
   const updateSharing = (mode) => {
     setSharingMode(mode);
+    onClearExternalMessage?.();
     setSavedMessage("מצב השיתוף עודכן");
   };
 
   const saveProfile = () => {
+    onClearExternalMessage?.();
     setSavedMessage("ההעדפות נשמרו");
   };
 
@@ -150,12 +158,43 @@ export default function ProfileScreen({ sharingMode, setSharingMode, onGoSupport
           })}
         </div>
 
-        {savedMessage && (
+        {(externalMessage || savedMessage) && (
           <div className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-[#EAF8EC] p-3 text-sm font-bold text-[#247A38]">
             <CheckCircle2 size={17} />
-            {savedMessage}
+            {externalMessage || savedMessage}
           </div>
         )}
+
+        <div className="mt-4 rounded-[22px] border border-[#DCEDEF] bg-[#F4FAFB] p-3">
+          <h3 className="font-extrabold text-[#12324A]">המערכת לא חושפת אבחנות</h3>
+          <p className="mt-1 text-sm font-semibold leading-6 text-[#12324A]/62">
+            היא משתפת צרכים בלבד, ורק לפי הבחירה שלך.
+          </p>
+        </div>
+      </Card>
+
+      <Card className="border-[#CFECEF] bg-[#EAF6F7]">
+        <div className="flex items-start gap-3">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#008C95]">
+            <Lock size={22} />
+          </span>
+          <div>
+            <h2 className="font-extrabold text-[#12324A]">פרטיות לפני הכול</h2>
+            <p className="mt-1 text-sm font-semibold leading-6 text-[#12324A]/62">
+              המידע נשמר בשליטתך. אפשר לשנות את רמת השיתוף בכל רגע, והמערכת משתפת צרכים בלבד — לא אבחנות.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["שיתוף רק בהסכמה", "אפשר לשנות בכל רגע", "צרכים במקום אבחנות", "אנונימיות כברירת מחדל"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full bg-white px-3 py-1 text-xs font-extrabold text-[#008C95]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </Card>
 
       <button type="button" onClick={onGoSupportPreferences} className="w-full text-right">

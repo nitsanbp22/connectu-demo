@@ -26,6 +26,7 @@ export default function HomeScreen({
   onSendMentorHelpAlert,
   onGoLesson,
   onGoProfile,
+  onOpenOnboarding,
 }) {
   const lesson = lessons[0];
   const [selectedMood, setSelectedMood] = useState("רגוע");
@@ -93,9 +94,7 @@ export default function HomeScreen({
         {helpAlert && (
           <div className="mt-3 rounded-[22px] border border-[#BFE8C8] bg-[#EAF8EC] p-3 text-right shadow-[0_10px_24px_rgba(18,50,74,0.05)]">
             <p className="font-extrabold text-[#247A38]">{helpAlert.title}</p>
-            <p className="mt-1 text-sm font-bold text-[#12324A]/70">
-              נשלחה התראה ל{helpAlert.recipients.join(", ")}
-            </p>
+            <p className="mt-1 text-sm font-bold text-[#12324A]/70">{helpAlert.subtitle}</p>
             <p className="mt-2 text-xs font-semibold leading-5 text-[#12324A]/55">
               {helpAlert.recipients.length === 1
                 ? "בפרודקט האמיתי זו תישלח כהתראת Push לטלפון של המנטור שבחרת."
@@ -202,7 +201,7 @@ export default function HomeScreen({
               <Users size={26} />
             </div>
             <h2 className="mt-4 text-2xl font-extrabold text-[#12324A]">
-              כיצד תרצה לקבל עזרה?
+              איך תרצה לקבל עזרה?
             </h2>
             {mentorMessage && (
               <p className="mt-3 rounded-2xl bg-[#EAF8EC] p-3 text-sm font-bold text-[#247A38]">
@@ -235,6 +234,14 @@ export default function HomeScreen({
           </div>
         </div>
       )}
+
+      <button
+        type="button"
+        onClick={onOpenOnboarding}
+        className="mx-auto flex min-h-11 items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-extrabold text-[#12324A]/60 shadow-[0_8px_22px_rgba(18,50,74,0.05)]"
+      >
+        מצב דמו
+      </button>
     </div>
   );
 }

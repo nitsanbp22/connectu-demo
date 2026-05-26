@@ -11,7 +11,7 @@ const sections = [
   { key: "campus", title: "אירועים וחיי קמפוס", items: supportPreferences.campus },
 ];
 
-export default function SupportPreferencesScreen({ onBack }) {
+export default function SupportPreferencesScreen({ onBack, onSave }) {
   const [selected, setSelected] = useState({
     studyEnv: ["רעשים", "עומס בכיתה"],
     social: ["פנייה אישית"],
@@ -29,6 +29,11 @@ export default function SupportPreferencesScreen({ onBack }) {
           : [...current, item],
       };
     });
+  };
+
+  const handleSave = () => {
+    setSaved(true);
+    onSave?.(selected);
   };
 
   return (
@@ -89,9 +94,9 @@ export default function SupportPreferencesScreen({ onBack }) {
         <div className="flex items-start gap-3">
           <ShieldCheck className="mt-1 shrink-0 text-[#008C95]" />
           <div>
-            <h3 className="font-extrabold text-[#12324A]">ההעדפות נשמרות באופן מאובטח</h3>
+            <h3 className="font-extrabold text-[#12324A]">פרטיות לפני הכול</h3>
             <p className="mt-1 text-sm font-semibold leading-6 text-[#12324A]/60">
-              המידע מיועד לשיפור התמיכה והליווי האישי שלך. ניתן לעדכן בכל עת.
+              המידע נשמר בשליטתך. אפשר לשנות את רמת השיתוף בכל רגע, והמערכת משתפת צרכים בלבד — לא אבחנות.
             </p>
           </div>
         </div>
@@ -106,7 +111,7 @@ export default function SupportPreferencesScreen({ onBack }) {
 
       <button
         type="button"
-        onClick={() => setSaved(true)}
+        onClick={handleSave}
         className="flex w-full items-center justify-center gap-2 rounded-[22px] bg-[#008C95] py-4 text-lg font-extrabold text-white shadow-[0_14px_28px_rgba(0,140,149,0.18)]"
       >
         <Save size={20} />

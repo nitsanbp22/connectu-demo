@@ -6,11 +6,13 @@ import ProfileScreen from "./screens/ProfileScreen";
 import SupportPreferencesScreen from "./screens/SupportPreferencesScreen";
 import LessonScreen from "./screens/LessonScreen";
 import CommunityScreen from "./screens/CommunityScreen";
+import OnboardingScreen from "./screens/OnboardingScreen";
 import PublicClassChatScreen from "./screens/PublicClassChatScreen";
 import CloseCircleChatScreen from "./screens/CloseCircleChatScreen";
 import { chatMessages, community } from "./data/mockData";
 
 const NAV = {
+  ONBOARDING: "onboarding",
   HOME: "home",
   TASKS: "tasks",
   COMMUNITY: "community",
@@ -22,13 +24,14 @@ const NAV = {
 };
 
 export default function App() {
-  const [nav, setNav] = useState(NAV.HOME);
-  const [previousNav, setPreviousNav] = useState(NAV.HOME);
+  const [nav, setNav] = useState(NAV.ONBOARDING);
+  const [previousNav, setPreviousNav] = useState(NAV.ONBOARDING);
   const [sharingMode, setSharingMode] = useState("private");
   const [publicChat, setPublicChat] = useState(chatMessages.public);
   const [closeCircleChat, setCloseCircleChat] = useState(chatMessages.closeCircle);
   const [closeCircleNotifications, setCloseCircleNotifications] = useState([]);
   const [mentorNotifications, setMentorNotifications] = useState([]);
+  const [profileToast, setProfileToast] = useState("");
   const [closeCircleMembers, setCloseCircleMembers] = useState(() =>
     community.closeCircle.map((member, index) => ({
       id: member.id || member.name,
@@ -38,6 +41,7 @@ export default function App() {
   );
 
   const activeNav = useMemo(() => {
+    if (nav === NAV.ONBOARDING) return NAV.HOME;
     if (nav === NAV.SUPPORT) return NAV.PROFILE;
     if ([NAV.PUBLIC_CHAT, NAV.CLOSE_CHAT].includes(nav)) return NAV.COMMUNITY;
     if (nav === NAV.LESSON) return NAV.HOME;
@@ -64,14 +68,21 @@ export default function App() {
     setNav(NAV.CLOSE_CHAT);
   };
 
+  const formatRecipients = (recipients) => {
+    if (recipients.length <= 1) return recipients[0] || "";
+    if (recipients.length === 2) return `${recipients[0]} ו${recipients[1]}`;
+    return `${recipients.slice(0, -1).join(", ")} ו${recipients.at(-1)}`;
+  };
+
   const sendCloseCircleHelpAlert = () => {
     const alert = {
       id: Date.now(),
-      title: "התראה נשלחה למעגל הקרוב שלך",
+      title: "שלחנו התראה עדינה למעגל הקרוב שלך",
       recipients: closeCircleMembers.map((member) => member.name),
       body: "אני צריך עזרה כרגע. אשמח שמישהו יפנה אליי.",
       channel: "הדמיית Push לטלפון",
     };
+    alert.subtitle = `נשלחה התראה ל${formatRecipients(alert.recipients)}`;
 
     setCloseCircleNotifications((prev) => [alert, ...prev]);
     setCloseCircleChat((prev) => [
@@ -89,11 +100,12 @@ export default function App() {
   const sendMentorHelpAlert = () => {
     const alert = {
       id: Date.now(),
-      title: "התראה נשלחה למנטור שלך",
+      title: "שלחנו התראה למנטור שלך",
       recipients: ["עדי"],
       body: "אני צריך עזרה כרגע. אשמח שהמנטור יפנה אליי.",
       channel: "הדמיית Push לטלפון",
     };
+    alert.subtitle = `נשלחה התראה ל${formatRecipients(alert.recipients)}`;
 
     setMentorNotifications((prev) => [alert, ...prev]);
     setCloseCircleChat((prev) => [
@@ -116,7 +128,22 @@ export default function App() {
     setNav(previousNav === NAV.SUPPORT ? NAV.PROFILE : previousNav || NAV.HOME);
   };
 
+  const saveSupportPreferences = () => {
+    setProfileToast("ההעדפות נשמרו");
+    setPreviousNav(nav);
+    setNav(NAV.PROFILE);
+  };
+
   let screen = null;
+
+  if (nav === NAV.ONBOARDING) {
+    screen = (
+      <OnboardingScreen
+        onStart={() => goTo(NAV.SUPPORT)}
+        onSkip={() => goTo(NAV.HOME)}
+      />
+    );
+  }
 
   if (nav === NAV.HOME) {
     screen = (
@@ -132,6 +159,7 @@ export default function App() {
         }}
         onGoLesson={() => goTo(NAV.LESSON)}
         onGoProfile={() => goTo(NAV.PROFILE)}
+        onOpenOnboarding={() => goTo(NAV.ONBOARDING)}
       />
     );
   }
@@ -145,13 +173,20 @@ export default function App() {
       <ProfileScreen
         sharingMode={sharingMode}
         setSharingMode={setSharingMode}
+        externalMessage={profileToast}
+        onClearExternalMessage={() => setProfileToast("")}
         onGoSupportPreferences={() => goTo(NAV.SUPPORT)}
       />
     );
   }
 
   if (nav === NAV.SUPPORT) {
-    screen = <SupportPreferencesScreen onBack={() => goTo(NAV.PROFILE)} />;
+    screen = (
+      <SupportPreferencesScreen
+        onBack={() => goTo(previousNav === NAV.ONBOARDING ? NAV.HOME : NAV.PROFILE)}
+        onSave={saveSupportPreferences}
+      />
+    );
   }
 
   if (nav === NAV.LESSON) {
