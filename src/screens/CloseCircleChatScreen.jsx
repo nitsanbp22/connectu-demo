@@ -3,19 +3,21 @@ import { ChevronRight, Lock, Paperclip, Send, Smile, Users } from "lucide-react"
 import Avatar from "../components/Avatar";
 import Card from "../components/Card";
 import ChatBubble from "../components/ChatBubble";
-import { community } from "../data/mockData";
+import CloseCircleEditor from "../components/CloseCircleEditor";
 
 export default function CloseCircleChatScreen({
   messages,
   setMessages,
+  closeCircleMembers,
+  onUpdateCloseCircle,
   notifications = [],
   mentorNotifications = [],
   onBack,
-  onManageCircle,
 }) {
   const [input, setInput] = useState("");
   const [manageMessage, setManageMessage] = useState("");
   const [toast, setToast] = useState("");
+  const [editorOpen, setEditorOpen] = useState(false);
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -32,8 +34,13 @@ export default function CloseCircleChatScreen({
   };
 
   const handleManage = () => {
-    setManageMessage("ניהול המעגל נפתח בפרופיל");
-    onManageCircle?.();
+    setEditorOpen(true);
+  };
+
+  const saveCircle = (members) => {
+    onUpdateCloseCircle(members);
+    setManageMessage("המעגל הקרוב עודכן");
+    setEditorOpen(false);
   };
 
   return (
@@ -66,11 +73,16 @@ export default function CloseCircleChatScreen({
           <h2 className="font-extrabold text-[#12324A]">המעגל הקרוב שלך</h2>
           <Users size={21} className="text-[#008C95]" />
         </div>
-        <div className="flex justify-around gap-2">
-          {community.closeCircle.map((person) => (
-            <div key={person.name} className="text-center">
+        <div
+          className={`mx-auto grid w-full max-w-[260px] place-items-center gap-6 ${
+            closeCircleMembers.length <= 2 ? "grid-cols-2" : "grid-cols-3"
+          }`}
+        >
+          {closeCircleMembers.map((person) => (
+            <div key={person.name} className="flex w-full flex-col items-center text-center">
               <Avatar size={42} name={person.name} />
               <p className="mt-1 text-xs font-bold text-[#12324A]/70">{person.name}</p>
+              <p className="text-[11px] font-semibold text-[#12324A]/45">{person.role}</p>
             </div>
           ))}
         </div>
@@ -98,7 +110,7 @@ export default function CloseCircleChatScreen({
                 התראה נשלחה למעגל הקרוב שלך
               </h2>
               <p className="mt-1 text-sm font-bold text-[#12324A]/70">
-                נשלחה התראה לעדי, מאיה ונועה
+                נשלחה התראה ל{notifications[0].recipients.join(", ")}
               </p>
               <p className="mt-2 text-xs font-semibold leading-5 text-[#12324A]/55">
                 בפרודקט האמיתי זו הייתה נשלחת כהתראת Push לטלפון של אנשי המעגל הקרוב.
@@ -171,6 +183,14 @@ export default function CloseCircleChatScreen({
           <Send size={19} />
         </button>
       </div>
+
+      {editorOpen && (
+        <CloseCircleEditor
+          members={closeCircleMembers}
+          onSave={saveCircle}
+          onCancel={() => setEditorOpen(false)}
+        />
+      )}
     </div>
   );
 }

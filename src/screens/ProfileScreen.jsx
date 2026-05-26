@@ -80,7 +80,7 @@ export default function ProfileScreen({ sharingMode, setSharingMode, onGoSupport
           <div>
             <h2 className="text-2xl font-extrabold text-[#12324A]">אדם</h2>
             <p className="mt-1 text-sm font-semibold leading-6 text-[#12324A]/58">
-              כאן אפשר לעדכן את הדרך שבה ConnectU תומכת בך לאורך היום.
+              כאן תוכל לעדכן את הגדרות הפרטיות שלך ואת הקשיים והאתגרים בהם תצטרך סיוע.
             </p>
           </div>
         </div>

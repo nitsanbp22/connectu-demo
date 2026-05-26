@@ -75,7 +75,7 @@ export default function TasksScreen() {
             <Bell size={22} />
           </span>
           <p className="font-semibold leading-7 text-[#12324A]">
-            אפשר להתחיל בקטן. פרקי משימה אחת לשלב הבא.
+            אפשר להתחיל בקטן. פרק את המשימות שלך לשלבים קטנים ופשוטים.
           </p>
         </div>
       </Card>
@@ -141,14 +141,14 @@ function TaskCard({ task, expanded, onToggleSteps, onDone }) {
             onClick={onToggleSteps}
             className="min-h-11 rounded-full border border-[#008C95] bg-[#EAF6F7] px-3 py-3 text-sm font-extrabold text-[#008C95] shadow-[0_8px_18px_rgba(0,140,149,0.08)] transition active:scale-[0.98]"
           >
-            פרקי לשלבים
+            פרק לשלבים
           </button>
           <button
             type="button"
             onClick={onDone}
             className="min-h-11 rounded-full bg-[#008C95] px-3 py-3 text-sm font-extrabold text-white shadow-[0_12px_24px_rgba(0,140,149,0.18)] transition active:scale-[0.98]"
           >
-            סימנתי שסיימתי
+          סיימתי
           </button>
         </div>
       ) : (

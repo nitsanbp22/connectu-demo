@@ -12,9 +12,9 @@ import {
 } from "lucide-react";
 import Avatar from "../components/Avatar";
 import Card from "../components/Card";
+import CloseCircleEditor from "../components/CloseCircleEditor";
 import ConnectUIcon from "../components/ConnectUIcon";
 import StatusBadge from "../components/StatusBadge";
-import { community } from "../data/mockData";
 
 const tabs = ["מעגל קרוב", "מנטורים", "חיבורים"];
 
@@ -58,12 +58,22 @@ const recommended = [
 
 export default function CommunityScreen({
   sharingMode,
+  closeCircleMembers,
+  onUpdateCloseCircle,
   onOpenPublicChat,
   onOpenCloseChat,
   onOpenMentorChat,
 }) {
   const [activeTab, setActiveTab] = useState(sharingMode === "public" ? "חיבורים" : "מעגל קרוב");
   const [openDetails, setOpenDetails] = useState(null);
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [toast, setToast] = useState("");
+
+  const saveCircle = (members) => {
+    onUpdateCloseCircle(members);
+    setEditorOpen(false);
+    setToast("המעגל הקרוב עודכן");
+  };
 
   return (
     <div className="space-y-5">
@@ -103,7 +113,7 @@ export default function CommunityScreen({
       </Card>
 
       <section className="grid grid-cols-2 gap-3">
-        <MiniHubCard icon={Users} title="המעגל הקרוב שלי" value="3 אנשים" />
+        <MiniHubCard icon={Users} title="המעגל הקרוב שלי" value={`${closeCircleMembers.length} אנשים`} />
         <MiniHubCard icon={Sparkles} title="מנטורים זמינים" value="3 זמינים" />
         <MiniHubCard icon={Globe2} title="חיבורים מומלצים" value="2 הצעות" />
         <MiniHubCard icon={MessageCircle} title="צ׳אטים פעילים" value="2 שיחות" />
@@ -124,6 +134,12 @@ export default function CommunityScreen({
         ))}
       </div>
 
+      {toast && (
+        <div className="rounded-[22px] border border-[#BFE8C8] bg-[#EAF8EC] p-3 text-center text-sm font-bold text-[#247A38]">
+          {toast}
+        </div>
+      )}
+
       {activeTab === "מעגל קרוב" && (
         <section className="space-y-4">
           <Card>
@@ -136,21 +152,35 @@ export default function CommunityScreen({
               </div>
               <Users className="text-[#008C95]" />
             </div>
-            <div className="flex justify-around gap-2">
-              {community.closeCircle.map((person) => (
-                <div key={person.name} className="text-center">
+            <div
+              className={`mx-auto grid w-full max-w-[260px] place-items-center gap-6 ${
+                closeCircleMembers.length <= 2 ? "grid-cols-2" : "grid-cols-3"
+              }`}
+            >
+              {closeCircleMembers.map((person) => (
+                <div key={person.name} className="flex w-full flex-col items-center text-center">
                   <Avatar size={44} name={person.name} />
                   <p className="mt-1 text-xs font-bold text-[#12324A]/70">{person.name}</p>
+                  <p className="text-[11px] font-semibold text-[#12324A]/45">{person.role}</p>
                 </div>
               ))}
             </div>
-            <button
-              type="button"
-              onClick={onOpenCloseChat}
-              className="mt-4 min-h-11 w-full rounded-full bg-[#008C95] py-3 text-base font-extrabold text-white shadow-[0_12px_24px_rgba(0,140,149,0.16)]"
-            >
-              צ׳אט מעגל קרוב
-            </button>
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={onOpenCloseChat}
+                className="min-h-11 rounded-full bg-[#008C95] py-3 text-base font-extrabold text-white shadow-[0_12px_24px_rgba(0,140,149,0.16)]"
+              >
+                צ׳אט
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditorOpen(true)}
+                className="min-h-11 rounded-full border border-[#008C95] bg-[#EAF6F7] py-3 text-base font-extrabold text-[#008C95]"
+              >
+                ניהול המעגל
+              </button>
+            </div>
           </Card>
 
           <Card>
@@ -159,7 +189,7 @@ export default function CommunityScreen({
               <div>
                 <h3 className="font-extrabold text-[#12324A]">צ׳אט ציבורי לכיתה</h3>
                 <p className="text-sm font-semibold text-[#12324A]/55">
-                  רק אם תבחר/י לפתוח שיחה עם הכיתה
+                  רק אם תבחר לפתוח שיחה עם הכיתה
                 </p>
               </div>
             </div>
@@ -257,7 +287,7 @@ export default function CommunityScreen({
           <div>
             <h3 className="font-extrabold text-[#12324A]">הפרטיות שלך נשמרת</h3>
             <p className="mt-1 text-sm font-semibold leading-6 text-[#12324A]/60">
-              שום צ׳אט לא נפתח לבד. את/ה בוחר/ת מתי לשתף, עם מי, ובאיזה קצב.
+              שום צ׳אט לא נפתח לבד. אתה בוחר מתי לשתף, עם מי, ובאיזה קצב.
             </p>
             <div className="mt-3 flex items-center gap-2 text-sm font-bold text-[#008C95]">
               {sharingMode === "private" ? <Lock size={16} /> : <CheckCircle2 size={16} />}
@@ -268,6 +298,14 @@ export default function CommunityScreen({
           </div>
         </div>
       </Card>
+
+      {editorOpen && (
+        <CloseCircleEditor
+          members={closeCircleMembers}
+          onSave={saveCircle}
+          onCancel={() => setEditorOpen(false)}
+        />
+      )}
     </div>
   );
 }

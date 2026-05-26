@@ -8,7 +8,7 @@ import LessonScreen from "./screens/LessonScreen";
 import CommunityScreen from "./screens/CommunityScreen";
 import PublicClassChatScreen from "./screens/PublicClassChatScreen";
 import CloseCircleChatScreen from "./screens/CloseCircleChatScreen";
-import { chatMessages } from "./data/mockData";
+import { chatMessages, community } from "./data/mockData";
 
 const NAV = {
   HOME: "home",
@@ -29,6 +29,13 @@ export default function App() {
   const [closeCircleChat, setCloseCircleChat] = useState(chatMessages.closeCircle);
   const [closeCircleNotifications, setCloseCircleNotifications] = useState([]);
   const [mentorNotifications, setMentorNotifications] = useState([]);
+  const [closeCircleMembers, setCloseCircleMembers] = useState(() =>
+    community.closeCircle.map((member, index) => ({
+      id: member.id || member.name,
+      name: member.name,
+      role: ["חברה קרובה", "חברה ללימודים", "שותפה לשיעור"][index] || "איש קשר",
+    })),
+  );
 
   const activeNav = useMemo(() => {
     if (nav === NAV.SUPPORT) return NAV.PROFILE;
@@ -61,7 +68,7 @@ export default function App() {
     const alert = {
       id: Date.now(),
       title: "התראה נשלחה למעגל הקרוב שלך",
-      recipients: ["עדי", "מאיה", "נועה"],
+      recipients: closeCircleMembers.map((member) => member.name),
       body: "אני צריך עזרה כרגע. אשמח שמישהו יפנה אליי.",
       channel: "הדמיית Push לטלפון",
     };
@@ -155,6 +162,8 @@ export default function App() {
     screen = (
       <CommunityScreen
         sharingMode={sharingMode}
+        closeCircleMembers={closeCircleMembers}
+        onUpdateCloseCircle={setCloseCircleMembers}
         onOpenPublicChat={openPublicChat}
         onOpenCloseChat={openCloseChat}
         onOpenMentorChat={openCloseChat}
@@ -177,6 +186,8 @@ export default function App() {
       <CloseCircleChatScreen
         messages={closeCircleChat}
         setMessages={setCloseCircleChat}
+        closeCircleMembers={closeCircleMembers}
+        onUpdateCloseCircle={setCloseCircleMembers}
         notifications={closeCircleNotifications}
         mentorNotifications={mentorNotifications}
         onBack={backToPrevious}
