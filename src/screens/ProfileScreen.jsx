@@ -41,13 +41,7 @@ const sharingModeLabel = {
   closeCircle: "מעגל קרוב",
 };
 
-export default function ProfileScreen({
-  sharingMode,
-  setSharingMode,
-  externalMessage = "",
-  onClearExternalMessage,
-  onGoSupportPreferences,
-}) {
+export default function ProfileScreen({ sharingMode, setSharingMode, onGoSupportPreferences }) {
   const [savedMessage, setSavedMessage] = useState("");
   const [taskReminders, setTaskReminders] = useState(true);
   const [positiveFeedback, setPositiveFeedback] = useState(true);
@@ -56,12 +50,10 @@ export default function ProfileScreen({
 
   const updateSharing = (mode) => {
     setSharingMode(mode);
-    onClearExternalMessage?.();
     setSavedMessage("מצב השיתוף עודכן");
   };
 
   const saveProfile = () => {
-    onClearExternalMessage?.();
     setSavedMessage("ההעדפות נשמרו");
   };
 
@@ -158,10 +150,10 @@ export default function ProfileScreen({
           })}
         </div>
 
-        {(externalMessage || savedMessage) && (
+        {savedMessage && (
           <div className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-[#EAF8EC] p-3 text-sm font-bold text-[#247A38]">
             <CheckCircle2 size={17} />
-            {externalMessage || savedMessage}
+            {savedMessage}
           </div>
         )}
 
@@ -294,13 +286,7 @@ export default function ProfileScreen({
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={saveProfile}
-        className="w-full rounded-[22px] bg-[#008C95] py-4 text-lg font-extrabold text-white shadow-[0_14px_28px_rgba(0,140,149,0.18)]"
-      >
-        שמור
-      </button>
+      
     </div>
   );
 }

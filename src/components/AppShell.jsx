@@ -22,7 +22,7 @@ export default function AppShell({ nav, setNav, onCommunityNav, sharingMode, chi
   return (
     <div className="min-h-screen w-full bg-[#EEF4F6] md:bg-[linear-gradient(145deg,#eef4f6_0%,#f8fbfc_48%,#e7f1f3_100%)] md:px-6">
       <div className="relative mx-auto flex min-h-screen w-full max-w-[430px] flex-col bg-[#F4FAFB] shadow-none md:my-6 md:min-h-[calc(100vh-48px)] md:overflow-hidden md:rounded-[36px] md:shadow-[0_24px_70px_rgba(18,50,74,0.18)]">
-        <Header onLogoClick={() => setNav("home")} />
+        <Header onLogoClick={() => setNav("home")} onProfileClick={() => setNav("profile")} />
         <main
           ref={scrollRef}
           onScroll={handleScroll}

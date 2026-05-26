@@ -1,8 +1,7 @@
-import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 
-export default function Header({ onLogoClick }) {
+export default function Header({ onLogoClick, onProfileClick }) {
   const [logoState, setLogoState] = useState("loading");
 
   useEffect(() => {
@@ -25,11 +24,16 @@ export default function Header({ onLogoClick }) {
         </span>
       </div>
 
-      <div className="grid grid-cols-[72px_1fr_72px] items-center px-4 pb-3">
-        <div className="flex items-center gap-2">
+      <div className="grid grid-cols-[96px_1fr_96px] items-center px-4 pb-3">
+        <button
+          type="button"
+          onClick={onProfileClick}
+          aria-label="מעבר לפרופיל"
+          className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full text-right transition active:scale-[0.98]"
+        >
           <Avatar size={38} name="אדם" />
           <span className="text-sm font-bold text-[#12324A]">אדם</span>
-        </div>
+        </button>
 
         <button
           type="button"
@@ -51,13 +55,7 @@ export default function Header({ onLogoClick }) {
           )}
         </button>
 
-        <button
-          type="button"
-          aria-label="תפריט"
-          className="mr-auto flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#008C95] shadow-[0_8px_20px_rgba(0,140,149,0.08)]"
-        >
-          <Menu size={24} />
-        </button>
+        <div aria-hidden="true" />
       </div>
     </header>
   );
