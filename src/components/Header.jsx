@@ -1,0 +1,64 @@
+import { Menu } from "lucide-react";
+import { useEffect, useState } from "react";
+import Avatar from "./Avatar";
+
+export default function Header({ onLogoClick }) {
+  const [logoState, setLogoState] = useState("loading");
+
+  useEffect(() => {
+    const logo = new Image();
+    logo.onload = () => setLogoState("loaded");
+    logo.onerror = () => setLogoState("failed");
+    logo.src = "/images/college-logo.png";
+  }, []);
+
+  return (
+    <header className="z-20 w-full shrink-0 bg-[#F4FAFB]">
+      <div className="flex items-center justify-between px-5 pb-1 pt-2 text-xs font-semibold text-[#12324A]/55">
+        <span>5G</span>
+        <span>12:41</span>
+        <span className="flex items-center gap-1">
+          <span className="h-2 w-4 rounded-sm border border-[#12324A]/40">
+            <span className="block h-full w-3 rounded-sm bg-[#12324A]/45" />
+          </span>
+          <span className="h-1.5 w-1 rounded-sm bg-[#12324A]/45" />
+        </span>
+      </div>
+
+      <div className="grid grid-cols-[72px_1fr_72px] items-center px-4 pb-3">
+        <div className="flex items-center gap-2">
+          <Avatar size={38} name="אדם" />
+          <span className="text-sm font-bold text-[#12324A]">אדם</span>
+        </div>
+
+        <button
+          type="button"
+          onClick={onLogoClick}
+          aria-label="חזרה למסך הבית"
+          className="flex min-h-12 cursor-pointer items-center justify-center"
+        >
+          {logoState === "loaded" ? (
+            <img
+              src="/images/college-logo.png"
+              alt="האקדמית תל אביב־יפו"
+              className="h-12 w-auto object-contain"
+            />
+          ) : (
+            <div className="text-center leading-tight">
+              <div className="text-sm font-extrabold text-[#12324A]">האקדמית תל אביב־יפו</div>
+              <div className="text-[10px] font-bold text-[#008C95]">MAKE AN IMPACT</div>
+            </div>
+          )}
+        </button>
+
+        <button
+          type="button"
+          aria-label="תפריט"
+          className="mr-auto flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#008C95] shadow-[0_8px_20px_rgba(0,140,149,0.08)]"
+        >
+          <Menu size={24} />
+        </button>
+      </div>
+    </header>
+  );
+}
