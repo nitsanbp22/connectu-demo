@@ -1,28 +1,50 @@
-# ConnectU | Student Belonging & Support UX Prototype
+# ConnectU | Accessibility Hackathon Product & UX Prototype
 
-ConnectU is an interactive product prototype exploring how a digital campus experience could help students ask for support, control what they share, build a trusted circle, and feel more connected to academic life.
+ConnectU is an interactive campus-accessibility prototype created as part of a **college hackathon focused on improving accessibility for students with physical and mental disabilities**.
 
-The project is primarily a **product and UX case study**. The current implementation is a front-end prototype built with React and mock data so the main flows can be experienced and evaluated interactively.
+The concept explores how a digital campus experience could help students communicate practical support needs, control what they share, build a trusted support circle, and navigate academic life with greater autonomy.
+
+The project is primarily a **product and UX case study**. The current implementation is a front-end prototype built with React and mock data so the main flows could be experienced and demonstrated during the hackathon.
 
 [View the live prototype](https://connectu-demo.vercel.app)
 
+## Hackathon context
+
+The challenge was not simply to make an existing campus interface more accessible. The broader product question was how a college could better support students whose physical, emotional, sensory, social, or routine-related needs may affect their academic experience.
+
+Because the project was developed in a time-boxed hackathon setting, I focused on turning the problem into a tangible product concept quickly:
+
+```text
+Accessibility challenge
+   ↓
+User needs and friction points
+   ↓
+Product hypothesis
+   ↓
+Core flows and privacy model
+   ↓
+Mobile-first UX
+   ↓
+Interactive prototype
+```
+
 ## Product problem
 
-Students can experience academic, social, sensory, or routine-related friction without having an easy way to communicate what would help them.
+Students with accessibility needs may know what would help them but still lack a simple, low-friction way to communicate those needs in context.
 
 The product question behind ConnectU was:
 
-> How might we make it easier to ask for support while preserving autonomy, privacy, and control over disclosure?
+> How might we make it easier for students with accessibility needs to ask for support while preserving autonomy, privacy, and control over disclosure?
 
 ConnectU explores a model where the user describes **needs and preferences rather than diagnoses**, chooses how much to share, and can change that choice at any time.
 
 ## Product principles
 
-- **User control first:** sharing is explicit and adjustable.
+- **Accessibility through user control:** support should adapt to the student rather than forcing one fixed process.
 - **Needs over labels:** the experience focuses on practical support preferences rather than diagnoses.
 - **Low-friction help:** asking for help should not require composing a long explanation in a stressful moment.
 - **Progressive disclosure:** users can configure support gradually instead of completing one overwhelming form.
-- **Belonging, not only productivity:** tasks and reminders sit alongside community and support flows.
+- **Belonging, not only accommodation:** academic support, peer connection, and day-to-day participation are treated as parts of the same experience.
 - **Calm UI:** the visual language aims to reduce cognitive load and make sensitive actions feel approachable.
 
 ## Core product journey
@@ -81,28 +103,29 @@ The important product decision is that sharing mode is not a one-time onboarding
 
 The prototype lets users maintain a close support circle and simulate a low-friction help request.
 
-Instead of forcing the user to decide what to write during a difficult moment, the flow can send a predefined, gentle request for contact to the selected people or mentor.
+Instead of forcing the user to decide what to write during a difficult moment, the flow can send a predefined, gentle request for contact to selected people or a mentor.
 
 ### 5. Academic continuity
 
-Tasks, lesson context, reminders, and community are included in the same product concept because support is more useful when it is connected to the student's actual academic routine.
+Tasks, lesson context, reminders, and community are included in the same concept because accessibility is not only about formal accommodations. It also affects participation, routine, communication, and belonging throughout academic life.
 
 ## My role
 
-I defined the product concept, user flows, interaction model, visual direction, and prototype behavior for ConnectU.
+I shaped the product concept and built the interactive prototype during the hackathon, covering both product design and implementation.
 
 My work included:
 
-- framing the user problem and product hypothesis;
-- mapping the onboarding and support journeys;
-- defining privacy and sharing states;
+- framing the accessibility challenge as a product problem;
+- identifying core user needs and product hypotheses;
+- prioritizing which flows could meaningfully be demonstrated within the hackathon timeframe;
+- mapping the onboarding, support, privacy, and help-request journeys;
+- defining sharing states and user control over disclosure;
 - designing the information architecture and mobile-first flows;
 - translating sensitive support needs into practical UI choices;
 - designing the interaction and visual system for a Hebrew RTL experience;
-- defining the support-circle and help-request behavior;
-- implementing the interactive React prototype so the concept could be tested as a working experience.
+- implementing the interactive React prototype so the concept could be presented as a working experience.
 
-The technical implementation supports the product work, but the main purpose of this project is to demonstrate **product thinking, UI/UX decisions, interaction design, and rapid prototyping**.
+The technical implementation supports the product work, but the main purpose of this project is to demonstrate **product thinking, accessibility-focused UI/UX, interaction design, prioritization, and rapid prototyping under time constraints**.
 
 ## What this prototype intentionally does not include
 
@@ -117,19 +140,20 @@ The current version:
 - does not integrate with an academic institution or learning-management system;
 - is not a medical, diagnostic, emergency, or clinical support tool.
 
-These limitations are deliberate for the prototype stage. They allow the product flows and UX assumptions to be explored before introducing production infrastructure or handling real sensitive data.
+These limitations were appropriate for the hackathon stage. They allowed the team to focus on the product concept, interaction model, and accessibility assumptions without handling real sensitive data.
 
 ## Product questions I would validate next
 
-Before moving from prototype to a real product, I would test:
+Before moving from hackathon prototype to a real campus product, I would test:
 
-1. whether users understand the difference between the sharing modes;
-2. which support preferences feel useful versus too personal;
-3. whether the Need Help action feels reassuring and clear rather than alarming;
-4. how much control users expect over exactly who can see each preference;
-5. whether community features improve belonging without creating pressure to participate;
-6. which academic integrations would provide value without increasing privacy risk;
-7. how the experience should differ for students, mentors, faculty, and accessibility/support teams.
+1. whether students with different accessibility needs find the proposed preference model relevant;
+2. whether users understand the difference between the sharing modes;
+3. which support preferences feel useful versus too personal;
+4. whether the Need Help action feels reassuring and clear rather than alarming;
+5. how much control users expect over exactly who can see each preference;
+6. whether community features improve belonging without creating pressure to participate;
+7. which campus integrations would provide value without increasing privacy risk;
+8. how the experience should differ for students, mentors, faculty, and accessibility/support teams.
 
 See [`docs/PRODUCT_CASE_STUDY.md`](docs/PRODUCT_CASE_STUDY.md) for the full product reasoning and next-step validation plan.
 
@@ -152,5 +176,6 @@ See [`SECURITY.md`](SECURITY.md) for the public-repository scope.
 ---
 
 **Project:** ConnectU  
+**Context:** College accessibility hackathon  
 **Status:** Interactive product prototype  
-**Focus:** Product management · UI/UX · privacy-aware interaction design · rapid prototyping
+**Focus:** Product management · accessibility UX · privacy-aware interaction design · rapid prototyping
