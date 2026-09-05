@@ -8,6 +8,46 @@ The project is primarily a **product and UX case study**. The current implementa
 
 [View the live prototype](https://connectu-demo.vercel.app)
 
+## Product preview
+
+<p align="center">
+  <img src="assets/screenshots/connectu-intro.png" width="300" alt="ConnectU introduction and product principles" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/home-overview.png" width="300" alt="ConnectU daily home experience" />
+</p>
+
+<p align="center"><sub>Accessibility concept and personalization · Daily academic support experience</sub></p>
+
+### Support preferences and privacy
+
+<p align="center">
+  <img src="assets/screenshots/support-preferences.png" width="300" alt="ConnectU support preferences" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/privacy-sharing.png" width="300" alt="ConnectU privacy and sharing controls" />
+</p>
+
+The prototype turns broad accessibility needs into concrete, selectable support preferences and keeps disclosure under the user's control through visible sharing states.
+
+### Academic continuity and community
+
+<p align="center">
+  <img src="assets/screenshots/tasks.png" width="300" alt="ConnectU task support and task decomposition" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/community.png" width="300" alt="ConnectU community, mentors and close circle" />
+</p>
+
+Accessibility support is connected to the student's actual academic routine through tasks, reminders, peer support, mentors, and a trusted close circle.
+
+### Contextual accessibility support
+
+<p align="center">
+  <img src="assets/screenshots/home-anonymous-alert.png" width="300" alt="ConnectU anonymous course accessibility alert" />
+</p>
+
+The prototype also explores contextual support inside the course experience, for example surfacing an anonymous classroom need without exposing which student requested the adjustment.
+
+For a concise feature walkthrough, see [`docs/PRODUCT_WALKTHROUGH.md`](docs/PRODUCT_WALKTHROUGH.md).
+
 ## Hackathon context
 
 The challenge was not simply to make an existing campus interface more accessible. The broader product question was how a college could better support students whose physical, emotional, sensory, social, or routine-related needs may affect their academic experience.
