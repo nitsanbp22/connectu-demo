@@ -2,15 +2,33 @@
 
 ## Context
 
-ConnectU explores a campus support experience centered on belonging, autonomy, and practical support needs.
+ConnectU was created as part of a **college hackathon focused on accessibility for students with physical and mental disabilities**.
 
-The prototype was created to examine a product opportunity rather than to simulate a finished institutional system. The goal was to make the core experience tangible enough to evaluate the flows, language, privacy model, and interaction decisions before investing in production infrastructure.
+The project explored how a digital campus experience could reduce friction around asking for help, communicating support needs, and participating in academic life while preserving privacy and personal control.
+
+Because this was a hackathon, the goal was not to design a complete institutional system. The goal was to turn an accessibility challenge into a clear product hypothesis and a working interactive prototype quickly enough to demonstrate and discuss the core experience.
+
+## Hackathon framing
+
+The starting point was broader than interface accessibility alone.
+
+The challenge involved students whose needs may affect:
+
+- navigating the academic routine;
+- sensory comfort;
+- social participation;
+- group work;
+- attendance and transitions;
+- communication during difficult moments;
+- knowing who to ask for support.
+
+The product opportunity was to create a layer between the student and the campus experience that could make support more proactive, contextual, and user-controlled.
 
 ## Problem framing
 
-The product starts from a simple tension:
+The core tension was:
 
-Students may need support but still want control over how much they reveal, to whom, and in what context.
+Students may know what would help them but still want control over how much they reveal, to whom, and in what context.
 
 Traditional support processes can require the student to:
 
@@ -24,9 +42,9 @@ ConnectU tests whether these interactions can be reframed around **support prefe
 
 ## Target users
 
-The primary prototype user is a student who may occasionally benefit from additional structure, social support, environmental adjustments, reminders, or easier ways to communicate needs.
+The primary concept was designed for students with physical disabilities, mental health-related accessibility needs, and other ongoing or situational support needs that can affect the academic experience.
 
-The concept is intentionally broader than a diagnosis-specific solution. The same interaction patterns could be useful for students experiencing different types of temporary or ongoing friction.
+The concept intentionally avoids being diagnosis-specific. The interface focuses on what the user needs in a situation rather than requiring them to identify themselves through a medical label.
 
 Potential secondary users in a future system include:
 
@@ -40,9 +58,9 @@ A production product would require different permissions, responsibilities, and 
 
 ## Product hypothesis
 
-If students can define concrete support preferences, choose who can see them, and request help through low-friction actions, then they may be more likely to ask for support early and feel greater control over the experience.
+If students can define concrete support preferences, choose who can see them, and request help through low-friction actions, then they may be more likely to ask for support earlier and feel greater control over the experience.
 
-This hypothesis needs user research and behavioral validation. The prototype demonstrates the proposed interaction model, not proof that the hypothesis is correct.
+This is a product hypothesis, not a validated clinical or institutional claim. The prototype demonstrates the proposed interaction model and the assumptions that should be tested next.
 
 ## Experience architecture
 
@@ -76,7 +94,7 @@ The important design choice is that configuration is not isolated from the rest 
 
 ### 1. Needs instead of diagnoses
 
-The interface asks about practical experiences such as noise, group work, transitions, or social initiation rather than asking the user to declare a diagnosis.
+The interface asks about practical experiences such as noise, group work, transitions, social initiation, or routine rather than asking the user to declare a diagnosis.
 
 Why:
 
@@ -102,12 +120,12 @@ Why:
 - faster scanning;
 - lower writing burden;
 - clearer product semantics;
-- easier future mapping from preference to recommendation or accommodation workflow;
+- easier future mapping from preference to support behavior;
 - supports progressive disclosure.
 
 Tradeoff:
 
-A predefined taxonomy may fail to represent a user's situation. A production version would need an optional custom input and research-driven taxonomy refinement.
+A predefined taxonomy may fail to represent a user's situation. A production version would need an optional custom input and research-driven taxonomy refinement with accessibility experts and students.
 
 ### 4. Need Help is intentionally lightweight
 
@@ -129,13 +147,29 @@ Why:
 
 Belonging does not mean every user wants to participate publicly. The product should support connection without making disclosure or community participation mandatory.
 
-### 6. Calm visual language
+### 6. Calm, accessibility-aware visual language
 
-The mobile UI uses large touch targets, rounded containers, limited visual density, consistent teal/navy color language, and repeated interaction patterns.
+The mobile UI uses large touch targets, rounded containers, limited visual density, clear hierarchy, consistent colors, and repeated interaction patterns.
 
 Why:
 
-For a product involving potentially stressful moments, the interface should avoid adding unnecessary visual or decision complexity.
+A product intended to support students with different accessibility needs should reduce avoidable cognitive and interaction load.
+
+A future version would also require dedicated accessibility testing for keyboard navigation, screen readers, contrast, motion, text scaling, and assistive technologies.
+
+## Prioritization under hackathon constraints
+
+The prototype intentionally covered only the flows needed to make the concept understandable during a time-boxed event.
+
+I prioritized:
+
+1. support preferences;
+2. privacy and sharing choices;
+3. close-circle support;
+4. a low-friction help action;
+5. enough academic context to show how support could fit into daily student life.
+
+I did not prioritize a production backend, institutional integrations, real notification infrastructure, or formal accessibility-service workflows because they would not have improved validation of the core concept during the hackathon.
 
 ## Privacy model at prototype stage
 
@@ -149,18 +183,19 @@ If developed further, privacy would need to become a core system capability rath
 - auditability of sharing changes;
 - deletion and retention policies;
 - strong authentication and authorization;
-- institutional/legal review;
+- institutional and legal review;
 - careful separation between peer support and formal institutional support.
 
 ## What I would research next
 
-### Usability questions
+### Accessibility and usability questions
 
+- Can students with different physical, sensory, cognitive, and mental health-related accessibility needs use the core flows comfortably?
 - Can users accurately predict what each sharing mode will do?
-- Do they understand who receives a Need Help request?
-- Are support-preference categories easy to scan?
+- Are support-preference categories easy to scan and understand?
 - Does the amount of configuration feel manageable?
-- Is the interface calm without feeling childish or overly therapeutic?
+- Are touch targets, contrast, hierarchy, and interaction patterns accessible across different needs?
+- How does the prototype perform with screen readers, keyboard navigation, and text scaling?
 
 ### Product desirability questions
 
@@ -168,6 +203,7 @@ If developed further, privacy would need to become a core system capability rath
 - Would students maintain a close-circle list?
 - Is peer connection desirable in the same product as academic support?
 - Would users trust an institution-operated version differently from an independent version?
+- Which features feel supportive and which risk feeling intrusive?
 
 ### Privacy questions
 
@@ -178,7 +214,7 @@ If developed further, privacy would need to become a core system capability rath
 
 ## MVP prioritization if continued
 
-A realistic next MVP would be smaller than the current concept surface.
+A realistic next MVP would be smaller than the full concept surface.
 
 Suggested first release:
 
@@ -189,7 +225,7 @@ Suggested first release:
 5. one low-friction help-request flow;
 6. lightweight reminders.
 
-Community chat and deeper institutional integrations should come later, after the trust and privacy model has been validated.
+Community chat and deeper institutional integrations should come later, after the trust, privacy, and accessibility model has been validated.
 
 ## Success metrics I would consider
 
@@ -198,16 +234,16 @@ For a real pilot, I would avoid measuring success only through engagement.
 Potential metrics include:
 
 - onboarding completion;
-- percentage of users who successfully understand sharing settings in usability testing;
+- successful comprehension of sharing settings in usability testing;
 - support preference completion and later edits;
 - help-request completion without abandonment;
 - perceived control and clarity scores;
 - percentage of users who report knowing exactly who can see their information;
-- repeat use of support features when relevant;
+- task success across users with different accessibility needs;
 - qualitative sense of belonging and usefulness.
 
 ## Prototype implementation
 
-The concept was implemented as an interactive React prototype so flows could be experienced rather than evaluated only through static screens.
+The concept was implemented as an interactive React prototype so the flows could be experienced rather than evaluated only through static screens.
 
-The current implementation uses local React state and fictional mock data. This was sufficient for the product-design goal while deliberately avoiding unnecessary collection or persistence of sensitive information during the concept stage.
+The current implementation uses local React state and fictional mock data. This was sufficient for the hackathon goal while deliberately avoiding unnecessary collection or persistence of sensitive information during the concept stage.
